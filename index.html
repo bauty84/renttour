@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="row">
+            <div class="col-md-6">
+                <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="titulo">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="entrada" class="col-sm-2 col-form-label datepicker">Entrada</label>
+                <div class="col-sm-12">
+                    <input type="date" class="form-control" id="entrada">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="salida" class="col-sm-2 col-form-label datepicker">Salida</label>
+                <div class="col-sm-12">
+                    <input type="date" class="form-control" id="salida">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="nacionalidad" class="form-label">Nacionalidad</label>
+                <select id="nacionalidad" class="form-select">
+                    <option disabled selected>Seleccione...</option>
+                    <option>Argentina</option>
+                    <option>Brasil</option>
+                    <option>Chile</option>
+                    <option>Uruguay</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="cantidad" class="form-label">Cantidad</label>
+                <select id="cantidad" class="form-select">
+                    <option selected>1 persona</option>
+                    <option>2 personas</option>
+                    <option>3 personas</option>
+                    <option>4 personas</option>
+                    <option>5 personas</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="bebe" class="form-label">¿con bebe?</label>
+                <select id="bebe" class="form-select">
+                    <option disabled selected>Seleccione...</option>
+                    <option>Si</option>
+                    <option>No</option>
+                </select>
+            </div>
+            <div class="col-12">
+                <label for="comentario" class="form-label">Comentario</label>
+                <input type="textarea" class="form-control" id="comentario" placeholder="Comentario adicional">
+            </div>
+            <div class="row d-flex justify-content-end" style="margin-top: 20px;">
+                <div class="col-1">
+                    <button id="clear" class="btn btn-warning">Limpiar</button>
+                </div>
+                <div class="col-1">
+                    <button type="submit" id="agregar" class="btn btn-success">Agregar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <script src="js/form_calendar.js"></script>
+</body>
+
+</html>
