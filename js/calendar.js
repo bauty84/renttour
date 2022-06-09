@@ -18,7 +18,16 @@ function openModal(date) {
     const eventForDay = reservas.find(e => e.date === clicked);
 
     if (eventForDay) {
-        document.getElementById('eventText').innerText = eventForDay.persona;
+        document.getElementById('reservaText').innerHTML = `
+            <p> <b>Persona</b>: ${eventForDay.persona}</p>
+            <p> <b>Fecha Entrada</b>: ${eventForDay.entrada}</p>
+            <p> <b>Fecha Salida</b>: ${eventForDay.salida}</p>
+            <p> <b>Nacionalidad</b>: ${eventForDay.nacionalidad}</p>
+            <p> <b>Cantidad pasajeros</b>: ${eventForDay.cantidad}</p>
+            <p> <b>Estacionamiento</b>: ${eventForDay.garage}</p>
+            <p> <b>Tarifa</b>: ${eventForDay.tarifa}</p>
+            <p> <b>Comentario</b>: ${eventForDay.comentario}</p>
+        `;
         deleteReservaModal.style.display = 'block';
     } else {
         newReservaModal.style.display = 'inline-block';
