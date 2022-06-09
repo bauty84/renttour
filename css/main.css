@@ -1,3 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&display=swap');
+
+* {
+    font-family: 'Rajdhani', sans-serif;
+}
+
+body {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    background-color: #FFFCFF;
+}
+
+button {
+    border: none;
+    background-color: white;
+}
+
+#mes {
+    color: #d36c6c;
+    font-size: 26px;
+}
+
+#container {
+    width: 770px;
+}
+
+#weekdays {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #247BA0;
+}
+
+#weekdays div {
+    width: 100px;
+    padding: 10px;
+}
+
+#calendar {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    width: 100px;
+    padding: 10px;
+    height: 100px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: white;
+    margin: 5px;
+    box-shadow: 0px 0px 3px #CBD4C2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 0.5s, height 0.5s, background-color 0.5s, transform 0.5s;
+}
+
+.day:hover {
+    background-color: #dfc1ae !important;
+}
+
+.day+#currentDay {
+    background-color: #e8f4fa;
+}
+
+.event {
+    font-size: 10px;
+    padding: 3px;
+    background-color: #58bae4;
+    color: white;
+    border-radius: 5px;
+    max-height: 55px;
+    overflow: hidden;
+}
+
+.padding {
+    cursor: default !important;
+    background-color: #FFFCFF !important;
+    box-shadow: none !important;
+}
+
+#newReservaModal,
+#deleteReservaModal {
+    display: none;
+    z-index: 20;
+    padding: 25px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 3px black;
+    border-radius: 2px;
+    width: 1024px;
+    top: 150px;
+    left: calc(30% - 175px);
+    position: absolute;
+    font-family: sans-serif;
+}
+
+#eventReservaInput {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 3px gray;
+}
+
+#eventReservaInput.error {
+    border: 2px solid red;
+}
+
+#cancelBtn,
+#delBtn {
+    background-color: #d36c6c;
+    border-radius: 2px;
+    padding: 5px;
+    color: #FFFFFF;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+#saveBtn,
+#closeBtn {
+    background-color: #56885a;
+    border-radius: 2px;
+    padding: 5px;
+    color: #FFFFFF;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+#eventText {
+    font-size: 14px;
+}
+
+#modalBackDrop {
+    display: none;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
 .resumen_reserva {
     display: none;
+}
+
+#agregar {
+    border-radius: 100%;
+    background-color:hsla(290,60%,70%,0.0);
+}
+
+#agregar i {
+    color: rgb(95, 153, 177);
 }
