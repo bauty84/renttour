@@ -2,7 +2,7 @@ const agregar = document.getElementById('agregar');
 const confirmar = document.getElementById('confirmar');
 
 // Get current Date to use later to compare in and out dates.
-const getDate = () => {
+const getDate = () => { 
     const fecha = []
 
     const date = new Date();
