@@ -18,7 +18,7 @@ function openModal(date) {
     const eventForDay = reservas.find(e => e.date === clicked);
 
     if (eventForDay) {
-        document.getElementById('eventText').innerText = eventForDay.title;
+        document.getElementById('eventText').innerText = eventForDay.persona;
         deleteReservaModal.style.display = 'block';
     } else {
         newReservaModal.style.display = 'inline-block';
@@ -71,7 +71,7 @@ function cargarCalendario() {
             if (eventForDay) {
                 const eventDiv = document.createElement('div');
                 eventDiv.classList.add('event');
-                eventDiv.innerText = eventForDay.title;
+                eventDiv.innerText = eventForDay.persona;
                 daySquare.appendChild(eventDiv);
             }
 
@@ -85,11 +85,9 @@ function cargarCalendario() {
 }
 
 function closeModal() {
-    eventReservaInput.classList.remove('error');
     newReservaModal.style.display = 'none';
     deleteReservaModal.style.display = 'none';
     backDrop.style.display = 'none';
-    eventReservaInput.value = '';
     clicked = null;
     cargarCalendario();
 }
@@ -140,18 +138,22 @@ function addReserva() {
 }
 
 function saveReserva() {
-    if (eventReservaInput.value) {
-        eventReservaInput.classList.remove('error');
 
+    if (reservaArray) {
         reservas.push({
             date: clicked,
-            title: eventReservaInput.value,
+            persona: reservaArray[0],
+            entrada: reservaArray[1],
+            salida: reservaArray[2],
+            nacionalidad: reservaArray[3],
+            cantidad: reservaArray[4],
+            garage: reservaArray[5],
+            tarifa: reservaArray[6],
+            comentario: reservaArray[8],
         });
 
         localStorage.setItem('reservas', JSON.stringify(reservas));
         closeModal();
-    } else {
-        eventReservaInput.classList.add('error');
     }
 }
 
