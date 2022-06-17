@@ -2,6 +2,9 @@
 let nav = 0;
 let clicked = null;
 let reservas = localStorage.getItem('reservas') ? JSON.parse(localStorage.getItem('reservas')) : [];
+reservas.forEach(element => {
+    console.log(element);
+});
 let resumenContainer = document.getElementById('resumen_detalle_reserva');
 let reservaArray = [];
 
@@ -15,19 +18,18 @@ const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Frida
 function openModal(date) {
     clicked = date;
 
-    const eventForDay = reservas.find(e => e.date === clicked);
+    const eventsForDay = reservas.find(e => e.date === clicked);
 
-    if (eventForDay) {
+    if (eventsForDay) {
         document.getElementById('reservaText').innerHTML = `
-            <p> <b>Persona</b>: ${eventForDay.persona}</p>
-            <p> <b>Fecha Entrada</b>: ${eventForDay.entrada}</p>
-            <p> <b>Fecha Salida</b>: ${eventForDay.salida}</p>
-            <p> <b>Nacionalidad</b>: ${eventForDay.nacionalidad}</p>
-            <p> <b>Cantidad pasajeros</b>: ${eventForDay.cantidad}</p>
-            <p> <b>Estacionamiento</b>: ${eventForDay.garage}</p>
-            <p> <b>Tarifa</b>: ${eventForDay.tarifa}</p>
-            <p> <b>Comentario</b>: ${eventForDay.comentario}</p>
-        `;
+            <p> <b>Persona</b>: ${eventsForDay.persona}</p>
+            <p> <b>Fecha Entrada</b>: ${eventsForDay.entrada}</p>
+            <p> <b>Fecha Salida</b>: ${eventsForDay.salida}</p>
+            <p> <b>Nacionalidad</b>: ${eventsForDay.nacionalidad}</p>
+            <p> <b>Cantidad pasajeros</b>: ${eventsForDay.cantidad}</p>
+            <p> <b>Estacionamiento</b>: ${eventsForDay.garage}</p>
+            <p> <b>Tarifa</b>: ${eventsForDay.tarifa}</p>
+            <p> <b>Comentario</b>: ${eventsForDay.comentario}</p>`;
         deleteReservaModal.style.display = 'block';
     } else {
         newReservaModal.style.display = 'inline-block';
@@ -71,16 +73,16 @@ function cargarCalendario() {
 
         if (i > paddingDays) {
             daySquare.innerText = i - paddingDays;
-            const eventForDay = reservas.find(e => e.date === dayString);
+            const eventsForDay = reservas.find(e => e.date === dayString);
 
             if (i - paddingDays === day && nav === 0) {
                 daySquare.id = 'currentDay';
             }
 
-            if (eventForDay) {
+            if (eventsForDay) {
                 const eventDiv = document.createElement('div');
                 eventDiv.classList.add('event');
-                eventDiv.innerText = eventForDay.persona;
+                eventDiv.innerText = eventsForDay.persona;
                 daySquare.appendChild(eventDiv);
             }
 
@@ -112,7 +114,7 @@ function addReserva() {
     const tarifa = document.getElementById('tarifa');
     const comentario = document.getElementById('comentario').value;
     const reserva = new formReserva(persona, entrada, salida, nacionalidad, cantidad, garage, tarifa, comentario);
-    
+
     // Visualizacion de resumen de la reserva
     let contenedor = document.createElement('table');
     contenedor.className = 'table table-striped text-center';
@@ -162,6 +164,9 @@ function saveReserva() {
         });
 
         localStorage.setItem('reservas', JSON.stringify(reservas));
+        document.querySelector("form").reset();
+        document.getElementById("resumen_detalle_reserva").innerHTML = '';
+        document.querySelector('.resumen_reserva').style.display = "none";
         closeModal();
     }
 }
