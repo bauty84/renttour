@@ -13,8 +13,9 @@ body {
 
 .container {
     max-width: 1220px;
-    
+
 }
+
 .navbar-expand-md .navbar-nav .nav-link {
     padding-right: initial;
 }
@@ -25,7 +26,7 @@ button {
 }
 
 #backBtn i,
-#nextBtn i { 
+#nextBtn i {
     color: rgb(107, 107, 107);
 }
 
@@ -66,7 +67,7 @@ input[type="textarea"],
     margin: auto;
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 }
 
 .day {
@@ -81,15 +82,24 @@ input[type="textarea"],
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    transition: width 0.5s, height 0.5s, background-color 0.5s, transform 0.5s;
 }
 
-.day:hover {
+.day:hover{
     background-color: #dfc1ae !important;
 }
 
 .day+#currentDay {
     background-color: #e8f4fa;
+}
+
+.dayMenu {
+    opacity: 0;
+    transition: all .5s ease-in-out;
+}
+
+.day:hover + .dayMenu {
+    opacity: 1;
+    height: 100%;
 }
 
 .event {
@@ -180,7 +190,7 @@ h2 {
 
 #agregar {
     border-radius: 100%;
-    background-color:hsla(290,60%,70%,0.0);
+    background-color: hsla(290, 60%, 70%, 0.0);
 }
 
 #agregar i {

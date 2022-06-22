@@ -67,12 +67,20 @@ function cargarCalendario() {
 
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
         const daySquare = document.createElement('section');
+        const dayMenu = document.createElement('div');
         daySquare.classList.add('day');
+        dayMenu.classList.add('dayMenu');
 
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
 
         if (i > paddingDays) {
             daySquare.innerText = i - paddingDays;
+            daySquare.appendChild(dayMenu);
+            dayMenu.innerHTML = `
+                    <i class="fa-solid fa-square-plus" id="btnAddReserva"></i>
+                    <i class="fa-solid fa-table-list" id="btnListReserva"></i>
+                    <i class="fa-solid fa-square-minus" id="btnDelReserva"></i>`;
+
             const eventsForDay = reservas.find(e => e.date === dayString);
 
             if (i - paddingDays === day && nav === 0) {
@@ -120,6 +128,7 @@ function addReserva() {
     contenedor.className = 'table table-striped text-center';
 
     reservaArray = reserva.addReserva();
+    let [personName, checkIn, checkOut, country, amount, parking, price, comments, total] = reservaArray;
 
     contenedor.innerHTML = `
             <tr>
@@ -133,14 +142,14 @@ function addReserva() {
                 <th>Precio</th>
             </tr>
             <tr>
-                <td>${reservaArray[0]}</td>
-                <td>${reservaArray[1]}</td>
-                <td>${reservaArray[2]}</td>
-                <td>${reservaArray[3]}</td>
-                <td>${reservaArray[4]}</td>
-                <td>${reservaArray[5]}</td>
-                <td>${reservaArray[6] == 0 ? "Normal":"Promocion"}</td>
-                <td>ARS ${reservaArray[8]}</td>
+                <td>${personName}</td>
+                <td>${checkIn}</td>
+                <td>${checkOut}</td>
+                <td>${country}</td>
+                <td>${amount}</td>
+                <td>${parking}</td>
+                <td>${price == 0 ? "Normal":"Promocion"}</td>
+                <td>ARS ${total}</td>
             </tr>`;
 
     resumenContainer.appendChild(contenedor);
@@ -149,18 +158,20 @@ function addReserva() {
 }
 
 function saveReserva() {
+    
+    let [personName, checkIn, checkOut, country, amount, parking, price, comments, total] = reservaArray;
 
     if (reservaArray) {
         reservas.push({
             date: clicked,
-            persona: reservaArray[0],
-            entrada: reservaArray[1],
-            salida: reservaArray[2],
-            nacionalidad: reservaArray[3],
-            cantidad: reservaArray[4],
-            garage: reservaArray[5],
-            tarifa: reservaArray[6],
-            comentario: reservaArray[8],
+            persona: personName,
+            entrada: checkIn,
+            salida: checkOut,
+            nacionalidad: country,
+            cantidad: amount,
+            garage: parking,
+            tarifa: price,
+            comentario: comments,
         });
 
         localStorage.setItem('reservas', JSON.stringify(reservas));
