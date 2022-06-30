@@ -1,5 +1,6 @@
 class formReserva {
-    constructor(persona, entrada, salida, nacionalidad, cantidad, garage, tarifa, comentario) {
+    constructor(idDay, persona, entrada, salida, nacionalidad, cantidad, garage, tarifa, comentario) {
+        this.idDay = idDay;
         this.persona = persona;
         this.entrada = entrada;
         this.salida = salida;
@@ -80,7 +81,7 @@ class formReserva {
             for (let i = 0; i < salidaArray.length; i++) {
                 salidaArrayInt.push(parseInt(salidaArray[i]));
             };
-
+            evento.push(this.idDay);
             evento.push(this.persona);
 
             // Verifica si la fecha de entrada es mayor a la fecha actual

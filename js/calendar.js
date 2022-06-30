@@ -1,12 +1,13 @@
 // Variables iniciales y get del localstorage
 let nav = 0;
 let clicked = null;
+const reserva = [];
 let reservas = localStorage.getItem('reservas') ? JSON.parse(localStorage.getItem('reservas')) : [];
 reservas.forEach(element => {
     console.log(element);
 });
 let resumenContainer = document.getElementById('resumen_detalle_reserva');
-let reservaArray = [];
+let resumenReservaArray = [];
 
 // constantes de variables
 const calendar = document.getElementById('calendar');
@@ -67,19 +68,12 @@ function cargarCalendario() {
 
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
         const daySquare = document.createElement('section');
-        const dayMenu = document.createElement('div');
         daySquare.classList.add('day');
-        dayMenu.classList.add('dayMenu');
 
         const dayString = `${month + 1}/${i - paddingDays}/${year}`;
 
         if (i > paddingDays) {
             daySquare.innerText = i - paddingDays;
-            daySquare.appendChild(dayMenu);
-            dayMenu.innerHTML = `
-                    <i class="fa-solid fa-square-plus" id="btnAddReserva"></i>
-                    <i class="fa-solid fa-table-list" id="btnListReserva"></i>
-                    <i class="fa-solid fa-square-minus" id="btnDelReserva"></i>`;
 
             const eventsForDay = reservas.find(e => e.date === dayString);
 
@@ -111,6 +105,20 @@ function closeModal() {
     cargarCalendario();
 }
 
+function getDatesInRange(dateIn, dateOut) {
+    const date = new Date(dateIn.getTime());
+    date.setDate(date.getDate() + 1);
+    const dates = [];
+
+    while (date <= dateOut) {
+        dates.push(`${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`);
+        date.setDate(date.getDate() + 1);
+    }
+
+    return dates;
+}
+
+
 function addReserva() {
     // Form para datos de reserva
     const persona = document.getElementById('persona').value;
@@ -121,14 +129,23 @@ function addReserva() {
     const garage = document.getElementById('garage');
     const tarifa = document.getElementById('tarifa');
     const comentario = document.getElementById('comentario').value;
-    const reserva = new formReserva(persona, entrada, salida, nacionalidad, cantidad, garage, tarifa, comentario);
+    const resumenReserva = new formReserva('', persona, entrada, salida, nacionalidad, cantidad, garage, tarifa, comentario);
+
+    const dateIn = new Date(entrada);
+    const dateOut = new Date(salida);
+    const dateRanges = getDatesInRange(dateIn, dateOut);
+
+    dateRanges.forEach(item => {
+        const reservaObj = new formReserva(item, persona, entrada, salida, nacionalidad, cantidad, garage, tarifa, comentario);
+        reserva.push(reservaObj.addReserva());
+    });
 
     // Visualizacion de resumen de la reserva
     let contenedor = document.createElement('table');
     contenedor.className = 'table table-striped text-center';
 
-    reservaArray = reserva.addReserva();
-    let [personName, checkIn, checkOut, country, amount, parking, price, comments, total] = reservaArray;
+    resumenReservaArray = resumenReserva.addReserva();
+    let [idDay, personName, checkIn, checkOut, country, amount, parking, price, comments, total] = resumenReservaArray;
 
     contenedor.innerHTML = `
             <tr>
@@ -158,28 +175,27 @@ function addReserva() {
 }
 
 function saveReserva() {
-    
-    let [personName, checkIn, checkOut, country, amount, parking, price, comments, total] = reservaArray;
 
-    if (reservaArray) {
+    for (let i = 0; i < reserva.length; i++) {
         reservas.push({
-            date: clicked,
-            persona: personName,
-            entrada: checkIn,
-            salida: checkOut,
-            nacionalidad: country,
-            cantidad: amount,
-            garage: parking,
-            tarifa: price,
-            comentario: comments,
+            date: reserva[i][0],
+            persona: reserva[i][1],
+            entrada: reserva[i][2],
+            salida: reserva[i][3],
+            nacionalidad: reserva[i][4],
+            cantidad: reserva[i][5],
+            garage: reserva[i][6],
+            tarifa: reserva[i][7],
+            comentario: reserva[i][8],
         });
-
-        localStorage.setItem('reservas', JSON.stringify(reservas));
-        document.querySelector("form").reset();
-        document.getElementById("resumen_detalle_reserva").innerHTML = '';
-        document.querySelector('.resumen_reserva').style.display = "none";
-        closeModal();
     }
+
+    localStorage.setItem('reservas', JSON.stringify(reservas));
+    document.querySelector("form").reset();
+    document.getElementById("resumen_detalle_reserva").innerHTML = '';
+    document.querySelector('.resumen_reserva').style.display = "none";
+    closeModal();
+
 }
 
 function deleteReserva() {

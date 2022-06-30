@@ -1,0 +1,26 @@
+{
+  "name": "renttour",
+  "version": "1.0.0",
+  "description": "Proyecto RentTour para curso de JS de CoderHouse",
+  "main": "calendar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bauty84/renttour.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bauty84/renttour/issues"
+  },
+  "homepage": "https://github.com/bauty84/renttour#readme",
+  "dependencies": {
+    "date-fns": "^2.28.0",
+    "full-icu": "^1.4.0",
+    "luxon": "^2.4.0",
+    "moment": "^2.29.3",
+    "weatherapi": "^0.0.8"
+  }
+}
